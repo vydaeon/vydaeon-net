@@ -38,6 +38,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_15
 }
 
+node {
+    download = true
+}
+
 task npm_clean_build(type: Delete) {
     delete 'build/npm'
 }
