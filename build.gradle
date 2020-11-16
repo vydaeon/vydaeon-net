@@ -51,3 +51,6 @@ npm_run_build.dependsOn(npm_clean_build)
 npm_copy_build.dependsOn(npm_run_build)
 run.dependsOn(npm_copy_build)
 jar.dependsOn(npm_copy_build)
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
