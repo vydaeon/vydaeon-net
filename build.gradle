@@ -1,0 +1,53 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id 'io.micronaut.application' version '1.0.5'
+    id 'com.github.node-gradle.node' version '2.2.4'
+}
+
+group 'net.vydaeon'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+micronaut {
+    runtime 'netty'
+    testRuntime 'junit5'
+    processing {
+        incremental true
+        annotations 'net.vydaeon.net.*'
+    }
+}
+
+dependencies {
+    implementation 'javax.annotation:javax.annotation-api'
+    implementation 'io.micronaut:micronaut-validation'
+    implementation 'io.micronaut:micronaut-runtime'
+    implementation 'io.micronaut:micronaut-http-client'
+    runtimeOnly 'ch.qos.logback:logback-classic'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor 'io.micronaut:micronaut-inject-java'
+}
+
+mainClassName = 'net.vydaeon.net.Application'
+java {
+    sourceCompatibility = JavaVersion.VERSION_15
+    targetCompatibility = JavaVersion.VERSION_15
+}
+
+task npm_clean_build(type: Delete) {
+    delete 'build/npm'
+}
+
+task npm_copy_build(type: Copy) {
+    from 'build/npm'
+    into 'build/resources/main/static'
+}
+
+npm_run_build.dependsOn(npm_clean_build)
+npm_copy_build.dependsOn(npm_run_build)
+run.dependsOn(npm_copy_build)
+jar.dependsOn(npm_copy_build)

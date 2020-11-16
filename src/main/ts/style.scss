@@ -1,0 +1,13 @@
+$primary: #00A000;
+$navbar-brand-font-size: 2rem;
+$dropdown-link-hover-color: #000000;
+$dropdown-header-color: #adb5bd;
+
+@import "~bootswatch/dist/cyborg/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cyborg/bootswatch";
+
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+.font-family-syne-mono {
+    font-family: 'Syne Mono', monospace;
+}
