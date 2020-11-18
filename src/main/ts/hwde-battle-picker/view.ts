@@ -13,9 +13,6 @@ export const root: m.Component = {
         const pickButtonAttr = {
             onclick: Controller.pickBattle
         }
-        const selectedBattleDescription = model.selectedMapName
-            ? `${model.selectedMapName}, Row ${model.selectedMapRowNumber}, Column ${model.selectedMapColumnNumber}`
-            : undefined
         const getElementSelectRows = () => {
             const getElementSelectRow = (rowIndex: number) => {
                 const getOption = (element?: Model.Element) => {
@@ -66,7 +63,13 @@ export const root: m.Component = {
                 "Adventure Mode Battle Picker"
             ]),
             m(".row.d-block.text-center.mb-1", m("button.btn.btn-primary", pickButtonAttr, "Pick Battle")),
-            m("h5.text-center.mb-5", selectedBattleDescription),
+            m("h5.text-center.mb-5", !model.selectedMapName ? undefined : [
+                model.selectedMapName,
+                m("br"),
+                `Row ${model.selectedMapRowNumber}`,
+                m("br"),
+                `Column ${model.selectedMapColumnNumber}`
+            ]),
             !model.selectedMapName ? undefined : [
                 m("#settingsAccordian.accordian.mb-5", [
                     m(".card", [
@@ -76,8 +79,8 @@ export const root: m.Component = {
                         m("#battleElementsCollapse.collapse.show[aria-labelledby=battleElementsCardHeader][data-parent=#settingsAccordian]",
                             m(".card-body", getElementSelectRows().map(row =>
                                 m(".row.mb-1", [
-                                    m(".col-sm.text-center.text-sm-right",
-                                        m("h6.mb-0.pt-1", `Element ${row.rowNumber}:`)),
+                                    m(".col-sm.d-flex",
+                                        m("strong.mx-auto.mr-sm-0.my-auto", `Element ${row.rowNumber}:`)),
                                     m(".col-sm.text-center.text-sm-left",
                                         m("select", row.selectAttr, row.options.map(option =>
                                             m("option", option.attr, option.name))))
@@ -90,8 +93,8 @@ export const root: m.Component = {
                         m("#characterLevelCollapse.collapse[aria-labelledby=characterLevelCardHeader][data-parent=#settingsAccordian]",
                             m(".card-body", model.characters.map(character =>
                                 m(".row.mb-1", [
-                                    m(".col-sm.text-center.text-sm-right",
-                                        m("h6.mb-0.pt-1", `${character.name}:`)),
+                                    m(".col-sm.d-flex",
+                                        m("strong.mx-auto.mr-sm-0.my-auto", `${character.name}:`)),
                                     m(".col-sm.text-center.text-sm-left",
                                         m("input[type=number][min=1][max=255]", getCharacterInputAttr(character)))
                                 ]))))
