@@ -9,9 +9,9 @@ export function getDropdownItems(): m.Children {
     return [
         m("h6.dropdown-header", "Animal Crossing: New Horizons"),
         m(m.route.Link, { class: "dropdown-item", href: "/what-2-craft" }, "What-2-Craft"),
-        // m(".dropdown-divider"),
-        // m("h6.dropdown-header", "Hyrule Warriors"),
-        // m(m.route.Link, { class: "dropdown-item", href: "/" }, "Adventure Mode Battle Picker")
+        m(".dropdown-divider"),
+        m("h6.dropdown-header", "Hyrule Warriors: Definitive Edition"),
+        m(m.route.Link, { class: "dropdown-item", href: "/hwde-battle-picker" }, "Adventure Mode Battle Picker")
     ]
 }
 
@@ -27,13 +27,13 @@ export const component: m.Component = {
                     m("dd", "Determine what you can craft (for the most bells), given what materials you have.")
                 ])
             ]),
-            // m(".lead", "Hyrule Warriors"),
-            // m("dl", [
-            //     m(m.route.Link, listGroupLinkAttr("/"), [
-            //         m("dt", "Adventure Mode Battle Picker"),
-            //         m("dd", "Randomly select adventure mode battles, and which characters & weapons to play.")
-            //     ])
-            // ])
+            m(".lead", "Hyrule Warriors: Definitive Edition"),
+            m("dl", [
+                m(m.route.Link, listGroupLinkAttr("/hwde-battle-picker"), [
+                    m("dt", "Adventure Mode Battle Picker"),
+                    m("dd", "Randomly select adventure mode battles, and which characters & weapons to play.")
+                ])
+            ])
         ])
     ]))
 }

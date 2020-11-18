@@ -14,6 +14,8 @@ const cache = <T>(loader: () => T): () => T => {
 }
 const getWhat2Craft = cache(async () =>
     await import(/*webpackChunkName:"what-2-craft"*/ "./what-2-craft/index"))
+const getHwdeBattlePicker = cache(async () =>
+    await import(/*webpackChunkName:"hwde-battle-picker"*/ "./hwde-battle-picker/index"))
 
 import(/*webpackChunkName:"bootstrap"*/ "bootstrap")
 
@@ -64,6 +66,13 @@ m.route(document.body, "/", {
             const what2Craft = await getWhat2Craft()
             const attr = { dropdownItems: what2Craft.View.getDropdownItems() }
             return { view: () => m(Layout.component, attr, m(what2Craft.View.hidden)) }
+        }
+    },
+    "/hwde-battle-picker": {
+        onmatch: async () => {
+            const hwdeBattlePicker = await getHwdeBattlePicker()
+            const attr = { dropdownItems: hwdeBattlePicker.View.getDropdownItems() }
+            return { view: () => m(Layout.component, attr, m(hwdeBattlePicker.View.root)) }
         }
     }
 })
